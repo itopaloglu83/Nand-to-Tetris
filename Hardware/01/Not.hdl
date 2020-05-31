@@ -1,0 +1,26 @@
+// File: Not.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Not.hdl
+
+/**
+ * Not gate:
+ * out = not in
+ */
+
+CHIP Not {
+    IN in;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // Simple usage of Nand gate.
+    Nand(a=in, b=in, out=out);
+}

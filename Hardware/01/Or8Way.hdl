@@ -1,0 +1,35 @@
+// File: Or8Way.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or8Way.hdl
+
+/**
+ * 8-way Or: 
+ * out = (in[0] or in[1] or ... or in[7])
+ */
+
+CHIP Or8Way {
+    IN in[8];
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // Or the inputs two bits at a time.
+    // Practically merge 8 inputs down to 4.
+    Or(a=in[0], b=in[1], out=tmp01);
+    Or(a=in[2], b=in[3], out=tmp23);
+    Or(a=in[4], b=in[5], out=tmp45);
+    Or(a=in[6], b=in[7], out=tmp67);
+    // Merge 4 inputs down to 2.
+    Or(a=tmp01, b=tmp23, out=tmp03);
+    Or(a=tmp45, b=tmp67, out=tmp47);
+    // Merge 2 inputs down to a single bit output.
+    Or(a=tmp03, b=tmp47, out=out);
+}

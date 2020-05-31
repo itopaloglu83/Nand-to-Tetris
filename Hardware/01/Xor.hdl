@@ -1,0 +1,32 @@
+// File: Xor.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Xor.hdl
+
+/**
+ * Exclusive-or gate:
+ * out = not (a == b)
+ */
+
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // Create negated inputs.
+    Not(in=a, out=aNot);
+    Not(in=b, out=bNot);
+    // Use original and negated inputs for outputs.
+    And(a=a, b=bNot, out=tmp1);
+    And(a=b, b=aNot, out=tmp2);
+    // Merge outputs with Or gate.
+    Or(a=tmp1, b=tmp2, out=out);
+}

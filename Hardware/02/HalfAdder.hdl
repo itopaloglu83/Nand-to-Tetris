@@ -1,0 +1,28 @@
+// File: HalfAdder.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/HalfAdder.hdl
+
+/**
+ * Computes the sum of two bits.
+ */
+
+CHIP HalfAdder {
+    IN a, b;    // 1-bit inputs
+    OUT sum,    // Right bit of a + b 
+        carry;  // Left bit of a + b
+
+    PARTS:
+    // Put you code here:
+    // Sum is 1 if either is 1.
+    Xor(a=a, b=b, out=sum);
+    // Carry is 1 if both are 1.
+    And(a=a, b=b, out=carry);
+}

@@ -1,0 +1,40 @@
+// File: RAM8.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM8.hdl
+
+/**
+ * Memory of 8 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // Use address value to select which register should store the given input.
+    DMux8Way(in=load, sel=address, a=loadR0, b=loadR1, c=loadR2, d=loadR3, e=loadR4, f=loadR5, g=loadR6, h=loadR7);
+    // Input bus is connected to every register.
+    // Selected 3 bit address is used to direct the load value.
+    Register(in=in, load=loadR0, out=R0);
+    Register(in=in, load=loadR1, out=R1);
+    Register(in=in, load=loadR2, out=R2);
+    Register(in=in, load=loadR3, out=R3);
+    Register(in=in, load=loadR4, out=R4);
+    Register(in=in, load=loadR5, out=R5);
+    Register(in=in, load=loadR6, out=R6);
+    Register(in=in, load=loadR7, out=R7);
+    // Address input directly selects which register value should be put as output.
+    Mux8Way16(a=R0, b=R1, c=R2, d=R3, e=R4, f=R5, g=R6, h=R7, sel=address, out=out);
+}

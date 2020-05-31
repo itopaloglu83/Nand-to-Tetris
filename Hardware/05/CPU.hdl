@@ -1,0 +1,86 @@
+// File: CPU.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 23 May 2020
+// Course: Nand to Tetris, Part 1
+// 
+// Summary: Hack CPU implementation.
+// 
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/CPU.hdl
+
+/**
+ * The Hack CPU (Central Processing unit), consisting of an ALU,
+ * two registers named A and D, and a program counter named PC.
+ * The CPU is designed to fetch and execute instructions written in 
+ * the Hack machine language. In particular, functions as follows:
+ * Executes the inputted instruction according to the Hack machine 
+ * language specification. The D and A in the language specification
+ * refer to CPU-resident registers, while M refers to the external
+ * memory location addressed by A, i.e. to Memory[A]. The inM input 
+ * holds the value of this location. If the current instruction needs 
+ * to write a value to M, the value is placed in outM, the address 
+ * of the target location is placed in the addressM output, and the 
+ * writeM control bit is asserted. (When writeM==0, any value may 
+ * appear in outM). The outM and writeM outputs are combinational: 
+ * they are affected instantaneously by the execution of the current 
+ * instruction. The addressM and pc outputs are clocked: although they 
+ * are affected by the execution of the current instruction, they commit 
+ * to their new values only in the next time step. If reset==1 then the 
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
+ * than to the address resulting from executing the current instruction. 
+ */
+
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+    // Put your code here:
+    // A-Instruction: instruction[15] == 0
+    // C-Instruction: instruction[15] == 1
+    // Determine which value should be load onto RegisterA.
+    Mux16(a=instruction, b=ALUOutput, sel=instruction[15], out=InputForA);
+    // Load value onto RegisterA if A-Instruction or if it's a destination.
+    Mux(a=true, b=instruction[5], sel=instruction[15], out=loadA);
+    // RegisterA also outputs the value for addressM.
+    ARegister(in=InputForA, load=loadA, out=RegisterA, out[0..14]=addressM);
+    // Determine if RegisterD should load.
+    Mux(a=false, b=instruction[4], sel=instruction[15], out=loadD);
+    DRegister(in=ALUOutput, load=loadD, out=RegisterD);
+    // Determine what should writeM should output.
+    Mux(a=false, b=instruction[3], sel=instruction[15], out=writeM);
+    // Use instruction[12] to determine which value should be load onto ALU.
+    Mux16(a=RegisterA, b=inM, sel=instruction[12], out=SelectAorM);
+    // Setup ALU with x, y, and instruction codes.
+    ALU(x=RegisterD, y=SelectAorM, 
+    zx=instruction[11], nx=instruction[10], zy=instruction[9], 
+    ny=instruction[8], f=instruction[7], no=instruction[6], 
+    out=ALUOutput, out=outM, zr=Zero, ng=Negative);
+    // Use zero and negative bits to determine positive values.
+    Or(a=Zero, b=Negative, out=NotPositive);
+    Not(in=NotPositive, out=Positive);
+    // Check jump conditions.
+    And(a=instruction[0], b=Positive, out=JCode1);
+    And(a=instruction[1], b=Zero, out=JCode2);
+    And(a=instruction[2], b=Negative, out=JCode3);
+    // Determine if a jump should take place.
+    Or8Way(in[0]=JCode1, in[1]=JCode2, in[2]=JCode3, in[3..7]=false, out=JMPCode);
+    // Do not jump on A-Instruction.
+    Mux(a=false, b=JMPCode, sel=instruction[15], out=loadPC);
+    // Increment PC unless reset or load commands are present.
+    // PC also outputs the next ROM address to read.
+    PC(in=RegisterA, load=loadPC, inc=true, reset=reset, out[0..14]=pc);
+}

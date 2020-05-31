@@ -1,0 +1,30 @@
+// File: Or.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or.hdl
+
+ /**
+ * Or gate:
+ * out = 1 if (a == 1 or b == 1)
+ *       0 otherwise
+ */
+
+CHIP Or {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // Negate both inputs first.
+    Not(in=a, out=aNot);
+    Not(in=b, out=bNot);
+    // Then use Nand gate.
+    Nand(a=aNot, b=bNot, out=out);
+}

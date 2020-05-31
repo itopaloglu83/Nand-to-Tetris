@@ -1,0 +1,32 @@
+// File: DMux8Way.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor:
+ * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+ *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+ *                            etc.
+ *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    // Put your code here:
+    // Use sel[2] to select a/b/c/d or e/f/g/h buses.
+    DMux(in=in, sel=sel[2], a=outABCD, b=outEFGH);
+    // Use sel[0..1] to select a/b/c/d or e/f/g/h as output
+    DMux4Way(in=outABCD, sel=sel[0..1], a=a, b=b, c=c, d=d);
+    DMux4Way(in=outEFGH, sel=sel[0..1], a=e, b=f, c=g, d=h);
+}

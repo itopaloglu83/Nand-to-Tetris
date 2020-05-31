@@ -1,0 +1,44 @@
+// File: PC.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // There are 4 input options for the program counter:
+    // - Previous PC value,
+    // - Incremented value,
+    // - Input value,
+    // - Reset to all-zeros.
+    // Use the loop value to create incremented program counter.
+    Inc16(in=loop, out=PlusOne);
+    // If statements are processed in reverse order to keep precedence.
+    // Use inc bit to select between loope or incremented value.
+    Mux16(a=loop, b=PlusOne, sel=inc, out=IncPC);
+    // Use load bit to push input value to output.
+    Mux16(a=IncPC, b=in, sel=load, out=LoadPC);
+    // Use reset bit to push all-zeros to output.
+    Mux16(a=LoadPC, b=false, sel=reset, out=ResetPC);
+    // Register is used to store the value.
+    // Load is set to true therefore every cycle loads the selected value.
+    Register(in=ResetPC, load=true, out=out, out=loop);
+}

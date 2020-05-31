@@ -1,0 +1,32 @@
+// File: Mux.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux.hdl
+
+/** 
+ * Multiplexor:
+ * out = a if sel == 0
+ *       b otherwise
+ */
+
+CHIP Mux {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // Create a negated version of sel.
+    Not(in=sel, out=selNot);
+    // Filter with sel and selNot.
+    And(a=a, b=selNot, out=aOut);
+    And(a=b, b=sel, out=bOut);
+    // Merge outputs together.
+    Or(a=aOut, b=bOut, out=out);
+}

@@ -1,0 +1,30 @@
+// File: DMux.hdl
+// -----
+// Author: Ihsan TOPALOGLU (itopaloglu83@gmail.com)
+// Date: 21 May 2020
+// Course: Nand to Tetris, Part 1
+//
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux.hdl
+
+/**
+ * Demultiplexor:
+ * {a, b} = {in, 0} if sel == 0
+ *          {0, in} if sel == 1
+ */
+
+CHIP DMux {
+    IN in, sel;
+    OUT a, b;
+
+    PARTS:
+    // Put your code here:
+    // Create a negated version of sel.
+    Not(in=sel, out=selNot);
+    // Use sel to filter the selected output.
+    And(a=in, b=selNot, out=a);
+    And(a=in, b=sel, out=b);
+}
