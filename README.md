@@ -1,4 +1,5 @@
-# Nand to Tetris
+# Nand-to-Tetris
+
 Project solutions for the Nand to Tetris course.
 
 ## Course
