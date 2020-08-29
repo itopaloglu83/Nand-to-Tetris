@@ -10,7 +10,7 @@ The best way to understand how a computer works is to built one from scratch. An
 
 ## Repository
 
-This repository contains my Nand to Tetris project solutions.
+This repository contains my Nand to Tetris project solutions. The course is comprised of two parts, hardware and software. Each part contains six projects that are self-contained in accordance with the abstraction principle.
 
 ## References
 
