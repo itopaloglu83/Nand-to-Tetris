@@ -3,9 +3,6 @@ layout: default
 title: Nand-to-Tetris
 ---
 
-# Nand-to-Tetris
-{: .no_toc }
-
 ## Course
 
 The best way to understand how a computer works is to built one from scratch. And that is exactly what [Nand to Tetris course](https://www.nand2tetris.org) does. The course leads students through 12 projects that gradually build a basic hardware platform and a modern software hierarchy. Throughout the processes students gain invaluable hands-on knowledge in the following areas:
