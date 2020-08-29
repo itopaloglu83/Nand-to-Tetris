@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Nand to Tetris
+title: Nand-to-Tetris
 ---
 
-# Nand to Tetris
+# Nand-to-Tetris
 {: .no_toc }
 
 ## Course
