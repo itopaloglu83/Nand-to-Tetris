@@ -1,15 +1,15 @@
-# Nand-to-Tetris
+# Nand to Tetris
 Project solutions for the Nand to Tetris course.
 
 ## Course
 
-The best way to understand how a computer works is to built one from scratch. And that is exactly what [Nand-to-Tetris course](https://www.nand2tetris.org) does.
+The best way to understand how a computer works is to built one from scratch. And that is exactly what [Nand to Tetris course](https://www.nand2tetris.org) does.
 
 ![Course Logo](assets/images/Logo.png)
 
 ## Repository
 
-This repository contains my Nand-to-Tetris project solutions.
+This repository contains my Nand to Tetris project solutions.
 
 ## References
 
