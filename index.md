@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Nand-to-Tetris
 ---
 
 ## Course
