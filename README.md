@@ -1,9 +1,18 @@
 # Nand-to-Tetris
 Project solutions for the Nand to Tetris course.
 
+## Course
+
+The best way to understand how a computer works is to built one from scratch. And that is exactly what [Nand-to-Tetris course](https://www.nand2tetris.org) does.
+
 ![Course Logo](assets/images/Logo.png)
 
-## Solution of The Elements of Computing Systems
-This repository contains my solutions to the projects for **[Nand to Tetris](http://www.nand2tetris.org)** course by Noam Nisan and Shimon Schocken. It's a fantastic course and I highly recommend it. Also, you should definitely check out the [book](https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/ref=ed_oe_p) as well.
+## Repository
+
+This repository contains my Nand-to-Tetris project solutions.
+
+## References
+
+The course is based upon [The Elements of Computing Systems](https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/) by Noam Nisan and Shimon Schocken. Also the official course [website](https://www.nand2tetris.org) contains all the project materials and software tools needed. 
 
 ![Book Cover](assets/images/Book.png)
