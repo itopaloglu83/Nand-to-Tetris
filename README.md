@@ -15,5 +15,3 @@ This repository contains my Nand to Tetris project solutions.
 ## References
 
 The course is based upon [The Elements of Computing Systems](https://www.amazon.com/Elements-Computing-Systems-Building-Principles/dp/0262640686/) by Noam Nisan and Shimon Schocken. Also the official course [website](https://www.nand2tetris.org) contains all the project materials and software tools needed. 
-
-![Book Cover](assets/images/Book.png)
